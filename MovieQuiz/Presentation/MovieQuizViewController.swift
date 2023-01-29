@@ -82,8 +82,7 @@ final class MovieQuizViewController: UIViewController {
         let text: String
         let correctAnswer: Bool
     }
-    
-    
+
     @IBOutlet private var imageView: UIImageView! //изображение фильма
     
     @IBOutlet private var textLabel: UILabel! //текст вопроса
@@ -135,6 +134,7 @@ final class MovieQuizViewController: UIViewController {
             guard let self = self else { return }
             self.showNextQuestionOrResults()
         }
+
     
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
