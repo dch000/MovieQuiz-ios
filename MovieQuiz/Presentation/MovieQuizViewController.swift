@@ -82,7 +82,8 @@ final class MovieQuizViewController: UIViewController {
         let text: String
         let correctAnswer: Bool
     }
-
+    
+    
     @IBOutlet private var imageView: UIImageView! //изображение фильма
     
     @IBOutlet private var textLabel: UILabel! //текст вопроса
@@ -117,7 +118,7 @@ final class MovieQuizViewController: UIViewController {
             title: result.title, message: result.text, preferredStyle: .alert)
         
         let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in
-            guard let self = self else {return}
+            guard let self = self else { return }
             
             self.currentQuestionIndex = 0
             
@@ -129,16 +130,8 @@ final class MovieQuizViewController: UIViewController {
             let viewModel = self.convert(model: firstQuestion)
             self.show(quiz: viewModel)
         }
-       
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
-            guard let self = self else { return }
-            self.showNextQuestionOrResults()
-        }
-
-    
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
-        
     }
     
     
@@ -162,7 +155,8 @@ final class MovieQuizViewController: UIViewController {
         imageView.layer.borderColor = isCorrect ? UIColor.ypGreen.cgColor : UIColor.ypRed.cgColor
         
         // Запуск следующего вопроса через 1 секунду
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
             self.imageView.layer.borderColor = UIColor.clear.cgColor
             self.showNextQuestionOrResults()
         }
