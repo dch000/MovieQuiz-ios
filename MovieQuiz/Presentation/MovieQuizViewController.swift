@@ -117,7 +117,9 @@ final class MovieQuizViewController: UIViewController {
         let alert = UIAlertController(
             title: result.title, message: result.text, preferredStyle: .alert)
         
-        let action = UIAlertAction(title: result.buttonText, style: .default) {_ in
+        let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in
+            guard let self = self else {return}
+            
             self.currentQuestionIndex = 0
             
             //счетчик правильных ответов в 0
@@ -128,8 +130,15 @@ final class MovieQuizViewController: UIViewController {
             let viewModel = self.convert(model: firstQuestion)
             self.show(quiz: viewModel)
         }
+       
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else { return }
+            self.showNextQuestionOrResults()
+        }
+    
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+        
     }
     
     
