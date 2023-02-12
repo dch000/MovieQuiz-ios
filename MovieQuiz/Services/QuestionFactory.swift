@@ -1,13 +1,12 @@
-//
-//  QuestionFactory.swift
-//  MovieQuiz
-//
-//  Created by Дмитрий Чеботарев on 29.01.2023.
-//
-
 import Foundation
 
-class QuestionFactory : QuestionFactoryProtocol {
+class QuestionFactory: QuestionFactoryProtocol { //объявление протокола
+    
+    private weak var delegate: QuestionFactoryDelegate?
+    
+    init(delegate: QuestionFactoryDelegate) {
+        self.delegate = delegate
+    }
     
     private let questions : [QuizQuestion] = [
         QuizQuestion(
@@ -50,12 +49,14 @@ class QuestionFactory : QuestionFactoryProtocol {
             image: "Vivarium",
             text: "Рейтинг этого фильма больше чем 6?",
             correctAnswer: false)]
-}
-
-func requestNextQuestion() -> QuizQuestion? {
-    guard let index = (0..<questions.count).randomElement() else {
-        return nil
+    
+    func requestNextQuestion() {
+        guard let index = (0..<questions.count).randomElement() else { delegate?.didRecieveNextQuestion(question: nil)
+            return
+        }
+        
+        let question = questions [safe: index]
+        delegate?.didRecieveNextQuestion(question: question)
     }
-    return questions[safe: index]
+    
 }
-
