@@ -152,7 +152,11 @@ YP Black (iOS)</string>
                     <connections>
                         <outlet property="counterLabel" destination="fgc-wQ-s5Z" id="t3H-zQ-bSn"/>
                         <outlet property="imageView" destination="adx-85-04Q" id="FKn-sH-n0a"/>
+                        <outlet property="indexQuestionText" destination="fgc-wQ-s5Z" id="qRk-3Y-OVS"/>
+                        <outlet property="noButton" destination="61c-Zb-fjS" id="goM-tE-qqS"/>
+                        <outlet property="questionLabelText" destination="0s3-pj-qhP" id="qUh-Ry-eO1"/>
                         <outlet property="textLabel" destination="iSp-j0-uQs" id="xLu-bn-dWM"/>
+                        <outlet property="yesButton" destination="Pjz-C5-EGa" id="CKv-fs-gDN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
