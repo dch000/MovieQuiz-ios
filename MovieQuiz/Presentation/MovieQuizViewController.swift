@@ -20,7 +20,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     @IBOutlet private weak var yesButton: UIButton! // кнопка ДА
     @IBOutlet private weak var questionLabelText: UILabel!
     @IBOutlet private weak var indexQuestionText: UILabel!
-    
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     // MARK: Lifecycle
     //Статус бар в белый
@@ -86,8 +86,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
     }
-    
-    
+        
     private func showAnswerResult(isCorrect: Bool) {
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
@@ -105,12 +104,34 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             self.unlockButton()
         }
     }
-    
-    
+        
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         return QuizStepViewModel(image: UIImage(named: model.image) ?? UIImage(),
                                  question: model.text,
                                  questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
+    }
+    
+    private func showLoadingIndicator() {
+        activityIndicator.isHidden = false // говорим что индикатор загрузки не скрыт
+        activityIndicator.startAnimating() // включаем анимацию
+    }
+    private func hideLoadingIndicator() {
+        activityIndicator.isHidden = true // говорим что индикатор загрузки скрыт
+        activityIndicator.stopAnimating() // отключаем анимацию
+    }
+        
+    private func showNetworkError(message: String) {
+        hideLoadingIndicator() //скрываем индикатор загрузки
+        
+        // создайте и покажите алерт
+        let model = AlertModel (title: "Ошибка",
+                                message: message,
+                                buttonText: "Попробовать еще раз", completion: { [weak self] in guard let self = self else {return}
+            self.currentQuestionIndex = 0
+            self.correctAnswers = 0
+            self.questionFactory?.requestNextQuestion()
+        })
+        alertPresenter?.showQuizResult(model: model)
     }
     
     // MARK: showNextQuestionOrResults
@@ -126,11 +147,11 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             
             let finalScreen = AlertModel (title: "Этот раунд окончен!",
                                           message: """
-Ваш результат: \(correctAnswers)/\(questionsAmount)
-Количество сыгранных квизов: \(gamesCount)
-Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))
-Средняя точность: \(String(format: "%.2f", totalAccuracy))%
-""" ,
+                                          Ваш результат: \(correctAnswers)/\(questionsAmount)
+                                          Количество сыгранных квизов: \(gamesCount)
+                                          Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))
+                                          Средняя точность: \(String(format: "%.2f", totalAccuracy))%
+                                          """ ,
                                           buttonText: "Сыграть еще раз",
                                           completion: { [weak self] in
                 guard let self = self else { return }
@@ -144,9 +165,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
             currentQuestionIndex += 1
             questionFactory?.requestNextQuestion()
         }
-        
     }
-    
 }
 
 
