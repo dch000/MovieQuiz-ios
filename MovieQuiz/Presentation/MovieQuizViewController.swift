@@ -115,6 +115,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         activityIndicator.isHidden = false // говорим что индикатор загрузки не скрыт
         activityIndicator.startAnimating() // включаем анимацию
     }
+    
     private func hideLoadingIndicator() {
         activityIndicator.isHidden = true // говорим что индикатор загрузки скрыт
         activityIndicator.stopAnimating() // отключаем анимацию
