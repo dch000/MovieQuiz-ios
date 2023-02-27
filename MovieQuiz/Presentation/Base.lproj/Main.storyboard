@@ -137,6 +137,9 @@ YP Black (iOS)</string>
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="xCn-hC-cnd">
+                                <rect key="frame" x="205" y="456" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor">
@@ -147,9 +150,12 @@ YP Black (iOS)</string>
                             <constraint firstItem="8Bq-Xy-d80" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="0lx-qD-VLf"/>
                             <constraint firstItem="8Bq-Xy-d80" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="Fcn-uP-JI4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8Bq-Xy-d80" secondAttribute="trailing" constant="20" id="NNr-Cr-z6B"/>
+                            <constraint firstItem="xCn-hC-cnd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dNh-b1-pal"/>
+                            <constraint firstItem="xCn-hC-cnd" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="nHn-0O-kzH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="xCn-hC-cnd" id="OQX-0Q-AX4"/>
                         <outlet property="counterLabel" destination="fgc-wQ-s5Z" id="t3H-zQ-bSn"/>
                         <outlet property="imageView" destination="adx-85-04Q" id="FKn-sH-n0a"/>
                         <outlet property="indexQuestionText" destination="fgc-wQ-s5Z" id="qRk-3Y-OVS"/>
