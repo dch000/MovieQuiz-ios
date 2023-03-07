@@ -15,6 +15,7 @@ class AlertPresenter: AlertPresenterDelegate {
     }
     func showAlert(alert: UIAlertController) {
         delegate?.present(alert, animated: true)
+        alert.view.accessibilityIdentifier = "Game results"
     }
     init(delegate: UIViewController? = nil) {
         self.delegate = delegate
