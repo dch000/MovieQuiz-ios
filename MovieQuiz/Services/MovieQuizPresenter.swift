@@ -98,7 +98,6 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
             guard let self = self else { return }
             self.viewController?.blockingButton()
             self.proceedToNextQuestionOrResults()
-            
         }
     }
     

@@ -17,14 +17,14 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewProtocol {
     private var alertPresenter: AlertPresenterProtocol?
     private var presenter: MovieQuizPresenter!
     
-    @IBOutlet private weak var imageView: UIImageView! //изображение фильма
-    @IBOutlet private weak var textLabel: UILabel! //текст вопроса
-    @IBOutlet private weak var counterLabel: UILabel! // счетчик вопросов counterLabel
-    @IBOutlet private weak var noButton: UIButton! // кнопка НЕТ
-    @IBOutlet private weak var yesButton: UIButton! // кнопка ДА
-    @IBOutlet private weak var questionLabelText: UILabel!
-    @IBOutlet private weak var indexQuestionText: UILabel!
-    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private var imageView: UIImageView! //изображение фильма
+    @IBOutlet private var textLabel: UILabel! //текст вопроса
+    @IBOutlet private var counterLabel: UILabel! // счетчик вопросов counterLabel
+    @IBOutlet private var noButton: UIButton! // кнопка НЕТ
+    @IBOutlet private var yesButton: UIButton! // кнопка ДА
+    @IBOutlet private var questionLabelText: UILabel!
+    @IBOutlet private var indexQuestionText: UILabel!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     
     @IBAction private func noButtonClicked(_ sender: UIButton) {
         presenter.noButtonClicked()
@@ -32,6 +32,10 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewProtocol {
 
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         presenter.yesButtonClicked()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
     
     func setupActivityIndicator() {
@@ -108,7 +112,7 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewProtocol {
         }
         alertPresenter?.show(model: alert)
     }
-    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter = MovieQuizPresenter(viewController: self)
