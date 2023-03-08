@@ -1,9 +1,8 @@
-import UIKit
+import Foundation
 
 struct AlertModel {
-    let title: String //текст заголовка алерта
-    let message: String // текст сообщения алерта
-    let buttonText: String // текст для кнопки аллерта
-    let comletion: (() -> ()) // замыкание для параметров для действия по кнопке алерта
+    let title: String
+    let message: String
+    let buttonText: String
+    let completion: () -> Void
 }
-
