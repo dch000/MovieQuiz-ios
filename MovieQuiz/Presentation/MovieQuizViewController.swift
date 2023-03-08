@@ -67,7 +67,7 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewProtocol {
             preferredStyle: .alert)
         let action = UIAlertAction(
             title: model.buttonText,
-            style: .default) { _ in model.comletion()}
+            style: .default) { _ in model.completion()}
         
         alert.addAction(action)
         
